@@ -6,4 +6,7 @@
 
 
 import BusinessCalendar from './_businessCalendar.js';
-new BusinessCalendar();
+new BusinessCalendar({
+  startOnMon: true,
+  url: 'https://tools.qwel.design/calendar/'
+});

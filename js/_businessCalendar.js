@@ -49,13 +49,15 @@ export default class BusinessCalendar extends Calendar {
     const elems = this._body.querySelectorAll('[data-date]');
     elems.forEach((td) => {
       const date = td.dataset.date;
+      const week = td.dataset.week;
 
       // 予約開始日
       const today = new Date();
       const startDate = today.setDate(today.getDate() + this.options.delay);
 
       // 週のデフォルト値 (予約開始日以前は)
-      let state = (new Date(date) < startDate) ? 0 : 2;
+      // startDdate以前は0, 以降、土日が1, それ以外は2
+      let state = (new Date(date) < startDate) ? 0 : (week == 5 || week == 6) ? 1 : 2;
 
       // データがあれば、状態値を上書き
       if (new Date(date) > startDate) {
