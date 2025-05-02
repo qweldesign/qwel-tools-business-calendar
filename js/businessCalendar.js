@@ -1,10 +1,11 @@
 /**
  * Business Calendar
- * Author: Taigo Ito (https://qwel.design/)
- * Location: Fukui, Japan
+ * このファイルは QWEL Project の一部です。
+ * Part of the QWEL Project © QWEL.DESIGN 2025
+ * Licensed under GPL v3 – see https://qwel.design/
  */
 
-import Calendar from './_calendar.js';
+import Calendar from './calendar.js';
 
 export default class BusinessCalendar extends Calendar {
   async makeCalendar(year, month) {

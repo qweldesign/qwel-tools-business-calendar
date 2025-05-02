@@ -1,0 +1,99 @@
+/**
+ * Foundation - Normalize
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $root-font-size;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0; // Remove the margin in all browsers
+  background-color: $body-bg;
+  color: $body-color;
+  @include body();
+  -webkit-text-size-adjust: 100%; // Prevent adjustments of font size after orientation changes in iOS
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @include heading();
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: $h5-font-size;
+}
+
+h6 {
+  font-weight: 700;
+  font-size: $h6-font-size;
+}
+
+p,
+ol, ul,
+li {
+  margin-block: $default-margin;
+}
+
+small {
+  @include small-text();
+}
+
+blockquote {
+  @include blockquote();
+}
+
+a {
+  @include link-text();
+}
+
+img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+figure {
+  display: block;
+  margin-block: $default-margin;
+}
+
+figcaption {
+  @include small-text();
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+}
+
+button, input, select, textarea {
+  font: inherit;  // Change the font styles in all browsers
+}
