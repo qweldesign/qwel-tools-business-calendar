@@ -1,23 +1,50 @@
-# 営業日カレンダー | Business Calendar
+# QWEL Business Calendar (Simple Booking System)
   
 民宿の空室状況管理のための簡易システムとして開発。  
 
-SQLiteで状態管理 → 自作APIからfetch → JSで描画 と、  
-PHP / Vanilla JS でスクラッチした自信作のひとつ。
+SQLiteで状態管理 → 自作APIからfetch → JSで自作カレンダー描画 と、  
+PHP / Vanilla JS でフルスクラッチした作品。
 
-[https://tools.qwel.design/business-calendar/](https://tools.qwel.design/business-calendar/)
+▶ Sample DEMO: [https://tools.qwel.design/business-calendar/]
+
+---
+
+## 概要・機能 | Overview & Features
+
+- 民宿の空室状況管理のための簡易システムとして開発した、営業日カレンダーです。
+- コントロールから「編集」を選択してみてください。
+- すると、カレンダーの日付ごとの色を変えることができます。
+- SQLiteで状態管理 → 自作API → JSで自作カレンダー描画 と、PHP / Vanilla JS で全てスクラッチしました。
+
+---
+
+## 目的・背景 | Purpose & Background
+
+- 民宿の空室状況を簡単なシステムで管理したいという要望があった
+- これまで電話・メールでやり取りしていた連絡業務をシステムで可視化・効率化したい
+- 老夫婦がクリック操作のみで簡単に扱える形態を希望
+- 副業なので、部屋は1室のみで、1日1組の利用者限定 (農家民宿を想定)
+- 繁忙期は、宿泊を受け入れるかどうか、判断が曖昧になることがある
+
+---
+
+## 設計・実装 | Design & Implementation
+
+- SQLite で部屋の空き状況のデータ管理を行う
+- API で上記データを取得し、JSでカレンダーを描画
+- 編集モードに切り替え、カレンダーの日付をクリックするだけで、API 経由でデータを更新
+- 繁忙期の予約は、従来の業務ルーティン通り、電話・メールで確認を行う
+- 予め、月と曜日でデフォルトの状態を登録可能
+- 実運用では、編集モードへの切り替えにパスワードを使用
 
 ---
 
 ## ライセンス | License
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)  
+MIT License
 
-このプロジェクトは [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html) に基づき、改変・再配布の自由を保障しています。  
-This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html) , ensuring freedom to use, modify, and redistribute.  
-
-よって、改変・再配布の際は、著作権表記（© QWEL.DESIGN）および https://qwel.design/ を明記し、ソースコードを開示してください。  
-Therefore, if you modify or redistribute this software, you must retain the copyright notice (© QWEL.DESIGN) and https://qwel.design/, and make the source code available.  
+このプロジェクトは, 民宿の空室状況管理のための簡易システム等の用途として自由に使用できることを目的としています。  
+This project is intended to be freely used for purposes such as a simple system for managing vacancy availability at guesthouses.  
 
 詳しくは LICENSE ファイルをご覧ください。  
 See the LICENSE file for details.  
