@@ -9,7 +9,7 @@ $calendar-unit:  clamp(46px, 6vw, 69px);
   margin: 3rem auto;
   padding-block-end: 1.5rem;
 
-  &.--editMode {
+  &.is-editMode {
     background: rgba(128, 255, 255, .3);
   }
 
@@ -70,7 +70,7 @@ $calendar-unit:  clamp(46px, 6vw, 69px);
     }
 
     td {
-      &.--holiday {
+      &.is-holiday {
         color: red;
       }
       
@@ -88,7 +88,7 @@ $calendar-unit:  clamp(46px, 6vw, 69px);
     }
   }
 
-  &:not(.--startOnMon) {
+  &:not(.is-startOnMon) {
     th, td {
       &:first-child {
         color: red;
@@ -100,7 +100,7 @@ $calendar-unit:  clamp(46px, 6vw, 69px);
     }
   }
 
-  &.--startOnMon {
+  &.is-startOnMon {
     th, td {
       &:nth-child(7) {
         color: red;
@@ -128,15 +128,15 @@ $calendar-unit:  clamp(46px, 6vw, 69px);
     border-inline-start-width: 1.5rem;
     font-size: 0.875rem;
 
-    &--0 {
+    &.is-state-0 {
       border-color: rgba(255, 128, 128, .5);
     }
 
-    &--1 {
+    &.is-state-1 {
       border-color: rgba(255, 255, 128, .5);
     }
 
-    &--2 {
+    &.is-state-2 {
       border-color: rgba(128, 255, 128, .5);
     }
   }

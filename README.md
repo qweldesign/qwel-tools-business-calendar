@@ -5,7 +5,7 @@
 SQLiteで状態管理 → 自作APIからfetch → JSで自作カレンダー描画 と、  
 PHP / Vanilla JS でフルスクラッチした作品。
 
-▶ Sample DEMO: [https://tools.qwel.design/business-calendar/]
+▶ Sample DEMO: [https://qwel.design/tools/business-calendar/]
 
 ---
 

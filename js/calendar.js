@@ -42,7 +42,7 @@ export default class Calendar {
     this._body = this._elem.querySelector('.calendar__body');
 
     if (this.options.startOnMon) {
-      this._elem.classList.add('--startOnMon');
+      this._elem.classList.add('is-startOnMon');
     }
 
     // 現在年月を取得
@@ -178,7 +178,7 @@ export default class Calendar {
           td.dataset.week = week;
           // 祝日クラスを付与
           if (date in holidays) {
-            td.classList.add('--holiday');
+            td.classList.add('is-holiday');
             td.setAttribute('title', holidays[date]);
           }
           // 翌日へ

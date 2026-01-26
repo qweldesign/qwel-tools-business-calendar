@@ -24,5 +24,5 @@ new AutoCopyright(2019, 'QWEL.DESIGN');
 import BusinessCalendar from './js/businessCalendar.js';
 new BusinessCalendar({
   startOnMon: true,
-  url: 'https://tools.qwel.design/business-calendar/'}
+  url: 'https://qwel.design/tools/business-calendar/'}
 );

@@ -39,7 +39,7 @@ export default class BusinessCalendar extends Calendar {
     const mode = document.querySelector('.calendar__mode');
     if (!mode) return;
     mode.addEventListener('change', () => {
-      this._elem.classList.toggle('--editMode');
+      this._elem.classList.toggle('is-editMode');
     });
 
     // セルのデータ操作受付
@@ -73,7 +73,7 @@ export default class BusinessCalendar extends Calendar {
 
   _cellClickHandler(event) {
     // 編集モード時のみ受付
-    if (!(this._elem.classList.contains('--editMode'))) return;
+    if (!(this._elem.classList.contains('is-editMode'))) return;
 
     const target = event.target;
     const date = target.dataset.date;
