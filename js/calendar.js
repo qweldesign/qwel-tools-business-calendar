@@ -33,6 +33,8 @@ export default class Calendar {
 
     // 要素の定義
     this._elem = options.elem || document.getElementById('calendar');
+    if (!this._elem) return;
+    
     this._prev = this._elem.querySelector('.calendar__prev');
     this._next = this._elem.querySelector('.calendar__next');
     this._prevText = this._elem.querySelector('.calendar__prevText');
