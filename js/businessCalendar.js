@@ -21,13 +21,13 @@ export default class BusinessCalendar extends Calendar {
     date = new Date(date).toISOString().split('T')[0];
     const postData = new FormData;
     postData.set('date', date);
-    fetch(`${url}php/api.php?method=delete`, {
+    fetch(`${url}api/calendar.php?method=delete`, {
       method: 'POST',
       body: postData
     });
 
     // データを取得して、状態値を反映
-    const res = await fetch(`${url}php/api.php?method=fetch&year=${year}&month=${month + 1}`);
+    const res = await fetch(`${url}api/calendar.php?method=fetch&year=${year}&month=${month + 1}`);
     const data = await res.json();
     this.setStatus(data);
   }
@@ -96,7 +96,7 @@ export default class BusinessCalendar extends Calendar {
       postData.set('date', date);
       postData.set('state', state);
 
-      const res = await fetch(`${url}php/api.php?method=insert`, {
+      const res = await fetch(`${url}api/calendar.php?method=insert`, {
         method: 'POST',
         body: postData
       });
