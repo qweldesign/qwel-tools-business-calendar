@@ -29,25 +29,25 @@ export default class BusinessCalendar extends Calendar {
     // データを取得して、状態値を反映
     const res = await fetch(`${url}php/api.php?method=fetch&year=${year}&month=${month + 1}`);
     const data = await res.json();
-    this._setStatus(data);
+    this.setStatus(data);
   }
 
-  _handleEvents() {
-    super._handleEvents();
+  handleEvents() {
+    super.handleEvents();
 
     // モードの選択受付
     const mode = document.querySelector('.calendar__mode');
     if (!mode) return;
     mode.addEventListener('change', () => {
-      this._elem.classList.toggle('is-editMode');
+      this.elem.classList.toggle('is-editMode');
     });
 
     // セルのデータ操作受付
-    this._body.addEventListener('click', (event) => this._cellClickHandler(event));
+    this.body.addEventListener('click', (event) => this.cellClickHandler(event));
   }
 
-  _setStatus(data) {
-    const elems = this._body.querySelectorAll('[data-date]');
+  setStatus(data) {
+    const elems = this.body.querySelectorAll('[data-date]');
     elems.forEach((td) => {
       const date = td.dataset.date;
       const week = td.dataset.week;
@@ -71,9 +71,9 @@ export default class BusinessCalendar extends Calendar {
     });
   }
 
-  _cellClickHandler(event) {
+  async cellClickHandler(event) {
     // 編集モード時のみ受付
-    if (!(this._elem.classList.contains('is-editMode'))) return;
+    if (!(this.elem.classList.contains('is-editMode'))) return;
 
     const target = event.target;
     const date = target.dataset.date;
@@ -96,10 +96,18 @@ export default class BusinessCalendar extends Calendar {
       postData.set('date', date);
       postData.set('state', state);
 
-      fetch(`${url}php/api.php?method=insert`, {
+      const res = await fetch(`${url}php/api.php?method=insert`, {
         method: 'POST',
         body: postData
       });
+
+      if (res.ok) {
+        // 送信成功
+        console.log('updated');
+      } else {
+        // 送信失敗
+        console.log('update failed');
+      }
     }
   }
 }

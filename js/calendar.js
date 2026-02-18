@@ -12,39 +12,39 @@ export default class Calendar {
     // 表記の定義
     // 0: 1月, 1: 2月...なので注意
     if (this.options.formatJP) {
-      this._months = [
+      this.months = [
         '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'
       ];
     } else {
-      this._months = [
+      this.months = [
         '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'
       ];
     }
 
     if (this.options.startOnMon) {
-      this._weeks = [
+      this.weeks = [
         '月', '火', '水', '木', '金', '土', '日'
       ];
     } else {
-      this._weeks = [
+      this.weeks = [
         '日', '月', '火', '水', '木', '金', '土'
       ];
     }
 
     // 要素の定義
-    this._elem = options.elem || document.getElementById('calendar');
-    if (!this._elem) return;
+    this.elem = options.elem || document.getElementById('calendar');
+    if (!this.elem) return;
     
-    this._prev = this._elem.querySelector('.calendar__prev');
-    this._next = this._elem.querySelector('.calendar__next');
-    this._prevText = this._elem.querySelector('.calendar__prevText');
-    this._currentText = this._elem.querySelector('.calendar__currentText');
-    this._nextText = this._elem.querySelector('.calendar__nextText');
-    this._head = this._elem.querySelector('.calendar__head');
-    this._body = this._elem.querySelector('.calendar__body');
+    this.prev = this.elem.querySelector('.calendar__prev');
+    this.next = this.elem.querySelector('.calendar__next');
+    this.prevText = this.elem.querySelector('.calendar__prevText');
+    this.currentText = this.elem.querySelector('.calendar__currentText');
+    this.nextText = this.elem.querySelector('.calendar__nextText');
+    this.head = this.elem.querySelector('.calendar__head');
+    this.body = this.elem.querySelector('.calendar__body');
 
     if (this.options.startOnMon) {
-      this._elem.classList.add('is-startOnMon');
+      this.elem.classList.add('is-startOnMon');
     }
 
     // 現在年月を取得
@@ -63,41 +63,41 @@ export default class Calendar {
     this.year += year;
     
     // 休日データを取得
-    this.holidays = this._fetchHolidays();
+    this.holidays = this.fetchHolidays();
 
     // カレンダーを作成
     this.makeCalendar(this.year, this.month);
 
     // 月送りの操作受付
-    this._handleEvents();
+    this.handleEvents();
   }
 
-  async _fetchHolidays() {
+  async fetchHolidays() {
     const url = 'https://holidays-jp.github.io/api/v1/date.json';
     const res = await fetch(`${url}`);
     return await res.json();
 
   }
 
-  _handleEvents() {
-    if (!this._prev || !this._next) return;
+  handleEvents() {
+    if (!this.prev || !this.next) return;
 
     // 前月
-    this._prev.addEventListener('click', (event) => {
+    this.prev.addEventListener('click', (event) => {
       event.preventDefault();
       this.month--;
       if (this.month < 0) {
         this.year--;
-        this.month = this._months.length - 1;
+        this.month = this.months.length - 1;
       }
       this.makeCalendar(this.year, this.month);
     });
 
     // 次月
-    this._next.addEventListener('click', (event) => {
+    this.next.addEventListener('click', (event) => {
       event.preventDefault();
       this.month++;
-      if (this.month > this._months.length - 1) {
+      if (this.month > this.months.length - 1) {
         this.year++;
         this.month = 0;
       }
@@ -107,45 +107,45 @@ export default class Calendar {
 
   async makeCalendar(year, month) {
     // テキストラベルを変更
-    this._changeLabels(year, month);
+    this.changeLabels(year, month);
     // Headに曜日を記載
-    this._makeCalendarHead();
+    this.makeCalendarHead();
     // Bodyに日にちを記載
-    this._makeCalendarBody(year, month, await this.holidays);
+    this.makeCalendarBody(year, month, await this.holidays);
   }
 
-  _changeLabels(year, month) {
+  changeLabels(year, month) {
     const joint = this.options.formatJP ? '年' : '.';
-    if (this._prevText) {
-      const prevMonth = `${(month + this._months.length - 1) % this._months.length}`;
+    if (this.prevText) {
+      const prevMonth = `${(month + this.months.length - 1) % this.months.length}`;
       const prevYear = prevMonth < 11 ? year : year - 1;
-      this._prevText.textContent = `${prevYear}${joint}${this._months[prevMonth]}`;
+      this.prevText.textContent = `${prevYear}${joint}${this.months[prevMonth]}`;
     }
-    if (this._currentText) {
-      this._currentText.textContent = `${year}${joint}${this._months[month]}`;
+    if (this.currentText) {
+      this.currentText.textContent = `${year}${joint}${this.months[month]}`;
     }
-    if (this._nextText) {
-      const nextMonth = `${(month + this._months.length + 1) % this._months.length}`;
+    if (this.nextText) {
+      const nextMonth = `${(month + this.months.length + 1) % this.months.length}`;
       const nextYear = nextMonth > 0 ? year : year + 1;
-      this._nextText.textContent = `${nextYear}${joint}${this._months[nextMonth]}`;
+      this.nextText.textContent = `${nextYear}${joint}${this.months[nextMonth]}`;
     }
   }
 
-  _makeCalendarHead() {
+  makeCalendarHead() {
     // 現在の中身を削除
-    this._head.innerHTML = '';
+    this.head.innerHTML = '';
     // 一週間の行を作成
     const tr = document.createElement('tr');
     for (let i = 0; i < 7; i++) {
       // 一日の列に曜日を記載
       const th = document.createElement('th');
-      th.textContent = this._weeks[i];
+      th.textContent = this.weeks[i];
       tr.appendChild(th);
     }
-    this._head.appendChild(tr);
+    this.head.appendChild(tr);
   }
 
-  _makeCalendarBody(year, month, holidays) {
+  makeCalendarBody(year, month, holidays) {
     const startDate = new Date(year, month); // 月の初日
     let startDay = startDate.getDay(); // 初日の曜日
     if (this.options.startOnMon) {
@@ -157,7 +157,7 @@ export default class Calendar {
     let dayCount = 1; // 日にちをカウント
 
     // 現在の中身を削除
-    this._body.innerHTML = '';
+    this.body.innerHTML = '';
 
     for (let j = 0; j < 6; j++) {
       // 一週間の行を作成
@@ -174,7 +174,7 @@ export default class Calendar {
           // 日にちを記載
           td.innerHTML = `<span>${dayCount}</span>`;
           // 日にち・曜日データをセット
-          const date = this._parseDate(year, month, dayCount);
+          const date = this.parseDate(year, month, dayCount);
           td.dataset.date = date;
           const week = i;
           td.dataset.week = week;
@@ -188,11 +188,11 @@ export default class Calendar {
         }
         tr.appendChild(td);
       }
-      this._body.appendChild(tr);
+      this.body.appendChild(tr);
     }
   }
 
-  _parseDate(year, month, day) {
+  parseDate(year, month, day) {
     return `${year}-${('00' + (month + 1)).slice(-2)}-${('00' + day).slice(-2)}`;
   }
 }
